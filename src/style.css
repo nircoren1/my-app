@@ -11,6 +11,7 @@ body{
 }
 .on{
     pointer-events:none !important;
+    
 }
 
 img{
@@ -51,4 +52,8 @@ margin-right:70px;
 
     width:100%;
     pointer-events:none;
+}
+
+.invisible{
+    visibility: hidden !important;
 }

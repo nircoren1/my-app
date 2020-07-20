@@ -6,6 +6,7 @@ import Stopwatch from './clock.js';
 
 let flippedCards =[]
 let win = []
+let clicksNum = 1
 
 class Game extends React.Component{
     
@@ -86,39 +87,44 @@ class Game extends React.Component{
   }
   // need to seperate the function inside setTimeout to be an individual function
   cardEvent(card){
-   
+    console.log(card)
     flippedCards.push(card)
     card.setState({cantBeClicked: "on"})
+    clicksNum++
     if (flippedCards.length ==2) {
-      flippedCards.forEach((c) => c.setState({cantBeClicked: "off"}))
+      clicksNum++
       document.getElementsByClassName("cardHolder")[0].style.pointerEvents= "none"
-    }
+    
        setTimeout(() => {
         
         var all = document.getElementsByClassName(card.props.name)
-        if (flippedCards.length == 2 && flippedCards[0].props.name == flippedCards[1].props.name ) {
+        if (flippedCards[0].props.name == flippedCards[1].props.name ) {
           // same
+          flippedCards = []
           win.push(0,0)
-         
             for (var i = 0; i < all.length; i++) {
             all[i].style.visibility = 'hidden';
+            all[i].style.pointerEvents = 'none';
+
+            
           }
           if (win.length == card.props.flip().length) {
-            alert("well done! it took you " + card.props.returnCount() + " seconds.")
+            alert("well done! it took you " + card.props.returnCount() + " seconds and" +clicksNum + "turns.")
             card.props.stop()
           }
-          flippedCards = []
+          
         
-        } else if (flippedCards.length == 2){
+        } else {
           // different
+          flippedCards.forEach((c) => c.setState({cantBeClicked: "off"}))
           flippedCards.forEach((c) => c.setState({isFlipped: false}))
           flippedCards = []
-          console.log(card)
+         
         }
-        document.getElementsByClassName("cardHolder")[0].style.pointerEvents= "auto" },3000)
+        document.getElementsByClassName("cardHolder")[0].style.pointerEvents= "auto" },2000)
     
      
-     
+      } 
   }
   
 
