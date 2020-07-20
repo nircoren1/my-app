@@ -90,7 +90,7 @@ class Game extends React.Component{
     console.log(card)
     flippedCards.push(card)
     card.setState({cantBeClicked: "on"})
-    clicksNum++
+    
     if (flippedCards.length ==2) {
       clicksNum++
       document.getElementsByClassName("cardHolder")[0].style.pointerEvents= "none"
@@ -98,7 +98,7 @@ class Game extends React.Component{
        setTimeout(() => {
         
         var all = document.getElementsByClassName(card.props.name)
-        if (flippedCards[0].props.name == flippedCards[1].props.name ) {
+        if (flippedCards[0].props.name === flippedCards[1].props.name ) {
           // same
           flippedCards = []
           win.push(0,0)
@@ -109,7 +109,7 @@ class Game extends React.Component{
             
           }
           if (win.length == card.props.flip().length) {
-            alert("well done! it took you " + card.props.returnCount() + " seconds and" +clicksNum + "turns.")
+            alert("well done! it took you " + card.props.returnCount() + " seconds and " +clicksNum + " turns.")
             card.props.stop()
           }
           
